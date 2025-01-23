@@ -22,8 +22,9 @@ public class EnterprizePageTest {
     void  enterprizePageTest() {
         open("https://github.com");
         $(byText("Solutions")).hover();
-       // какой из этих двух вариантов предпочтительнее? на 24 строке или на 26?
+       // какой из этих двух вариантов предпочтительнее? на 24 строке, 26 или 27?
        // $$(".HeaderMenu-nav button").findBy(text("Solutions")).hover();
+       // $("nav.HeaderMenu-nav").$(byText("Solutions")).hover();
         $("[href='https://github.com/enterprise']").click();
         $("#hero-section-brand-heading").shouldHave(text("The AI-powered"));
     }
