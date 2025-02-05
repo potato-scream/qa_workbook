@@ -3,12 +3,14 @@ package demoqa;
 import org.junit.jupiter.api.Test;
 import pages.StudentRegistrationPage;
 
+
 public class StudentRegistrationFormTest extends TestBase {
-    StudentRegistrationPage StudentRegistrationPage = new StudentRegistrationPage();
+    StudentRegistrationPage studentRegistrationPage = new StudentRegistrationPage();
 
     @Test
     void studentRegistrationFormTest() {
-        StudentRegistrationPage.openPage()
+        studentRegistrationPage.openPage()
+                .removeBanner()
                 .setFirstName("Kseniia")
                 .setLastName("Romanovskaya")
                 .setEmail("potato@cat.com")
@@ -24,7 +26,7 @@ public class StudentRegistrationFormTest extends TestBase {
                 .pressSubmit()
                 .checkModalIsVisible(" Thanks for submitting the form");
 
-        StudentRegistrationPage.checkResults("Student Name", "Kseniia Romanovskaya")
+        studentRegistrationPage.checkResults("Student Name", "Kseniia Romanovskaya")
                 .checkResults("Student Email", "potato@cat.com")
                 .checkResults("Gender", "Female")
                 .checkResults("Mobile", "1234567890")
@@ -37,22 +39,24 @@ public class StudentRegistrationFormTest extends TestBase {
     }
 
     @Test
-    void RegistrationFormRequiredFieldsTest() {
-        StudentRegistrationPage.openPage()
+    void registrationFormRequiredFieldsTest() {
+        studentRegistrationPage.openPage()
+                .removeBanner()
                 .setFirstName("Kseniia")
                 .setLastName("Romanovskaya")
                 .setGender("Female")
                 .setPhoneNumber("1234567890")
                 .pressSubmit()
                 .checkModalIsVisible(" Thanks for submitting the form");
-        StudentRegistrationPage.checkResults("Student Name", "Kseniia Romanovskaya")
+        studentRegistrationPage.checkResults("Student Name", "Kseniia Romanovskaya")
                 .checkResults("Gender", "Female")
                 .checkResults("Mobile", "1234567890");
     }
 
     @Test
-    void InvalidRequiredFieldsTest() {
-        StudentRegistrationPage.openPage()
+    void invalidRequiredFieldsTest() {
+        studentRegistrationPage.openPage()
+                .removeBanner()
                 .setPhoneNumber("")
                 .pressSubmit()
                 .checkFirstNameInputIsInvalid()
@@ -61,8 +65,9 @@ public class StudentRegistrationFormTest extends TestBase {
     }
 
     @Test
-    void RegistrationFormWithShortPhoneNumberTest() {
-        StudentRegistrationPage.openPage()
+    void registrationFormWithShortPhoneNumberTest() {
+        studentRegistrationPage.openPage()
+                .removeBanner()
                 .setPhoneNumber("123")
                 .pressSubmit()
                 .checkUserNumberFieldIsInvalid();

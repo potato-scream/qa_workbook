@@ -11,12 +11,18 @@ public class TextBoxPage {
     public TextBoxPage openPage() {
         open("/text-box");
         $("h1").shouldHave(text("Text Box"));
-        executeJavaScript("$('footer').remove()");
-        executeJavaScript("$('#fixedban').remove()");
 
         return this;
     }
-    private SelenideElement fullNameInput = $("#userName"),
+
+    public TextBoxPage removeBanner() {
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+
+        return this;
+    }
+
+    private final SelenideElement fullNameInput = $("#userName"),
             emailInput = $("#userEmail"),
             currentAddressInput = $("#currentAddress"),
             permanentAddressInput = $("#permanentAddress"),

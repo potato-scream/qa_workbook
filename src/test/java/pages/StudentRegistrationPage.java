@@ -15,12 +15,18 @@ public class StudentRegistrationPage {
     public StudentRegistrationPage openPage() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
+
         return this;
     }
 
-    private SelenideElement firstNameInput = $("#firstName"),
+    public StudentRegistrationPage removeBanner() {
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+
+        return this;
+    }
+
+    private final SelenideElement firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             emailInput = $("#userEmail"),
             genderWrapper = $("#genterWrapper"),
@@ -134,20 +140,6 @@ public class StudentRegistrationPage {
         $(modalTitle).shouldHave(text(value));
 
         return this;
-    }
-
-    public StudentRegistrationPage checkI(String value) {
-        addressInput.setValue(value);
-
-        return this;
-    }
-
-    public SelenideElement getFirstNameInput() {
-        return $(firstNameInput);
-    }
-
-    public SelenideElement getLastNameInput() {
-        return $(lastNameInput);
     }
 
 
