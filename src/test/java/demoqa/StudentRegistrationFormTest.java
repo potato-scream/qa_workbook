@@ -2,7 +2,7 @@ package demoqa;
 
 import org.junit.jupiter.api.Test;
 import pages.StudentRegistrationPage;
-
+import static utils.RandomUtils.*;
 
 public class StudentRegistrationFormTest extends TestBase {
     StudentRegistrationPage studentRegistrationPage = new StudentRegistrationPage();
@@ -11,46 +11,46 @@ public class StudentRegistrationFormTest extends TestBase {
     void studentRegistrationFormTest() {
         studentRegistrationPage.openPage()
                 .removeBanner()
-                .setFirstName("Kseniia")
-                .setLastName("Romanovskaya")
-                .setEmail("potato@cat.com")
-                .setGender("Female")
-                .setPhoneNumber("1234567890")
-                .setSubject("Math")
-                .setDateOfBirth("30", "July", "2008")
-                .setHobbi("Sports")
-                .setPicture("img/1.png")
-                .setAddress("Some address 1")
-                .setState("NCR")
-                .setCity("Delhi")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(userEmail)
+                .setGender()
+                .setPhoneNumber(phoneNumber)
+                .setSubject()
+                .setDateOfBirth()
+                .setHobby()
+                .setPicture()
+                .setAddress(streetAddress)
+                .setState()
+                .setCity()
                 .pressSubmit()
-                .checkModalIsVisible(" Thanks for submitting the form");
+                .checkModalIsVisible();
 
-        studentRegistrationPage.checkResults("Student Name", "Kseniia Romanovskaya")
-                .checkResults("Student Email", "potato@cat.com")
-                .checkResults("Gender", "Female")
-                .checkResults("Mobile", "1234567890")
-                .checkResults("Date of Birth", "30 July,2008")
-                .checkResults("Subjects", "Maths")
-                .checkResults("Hobbies", "Sports")
-                .checkResults("Picture", "1.png")
-                .checkResults("Address", "Some address 1")
-                .checkResults("State and City", "NCR Delhi");
+        studentRegistrationPage.checkResults("Student Name", firstName + " " + lastName)
+                .checkResults("Student Email", userEmail)
+                .checkGender()
+                .checkResults("Mobile", phoneNumber)
+                .checkDateOfBirth()
+                .checkSubject()
+                .checkHobby()
+                .checkPicture()
+                .checkResults("Address", streetAddress)
+                .checkStateAndCity();
     }
 
     @Test
     void registrationFormRequiredFieldsTest() {
         studentRegistrationPage.openPage()
                 .removeBanner()
-                .setFirstName("Kseniia")
-                .setLastName("Romanovskaya")
-                .setGender("Female")
-                .setPhoneNumber("1234567890")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setGender()
+                .setPhoneNumber(phoneNumber)
                 .pressSubmit()
-                .checkModalIsVisible(" Thanks for submitting the form");
-        studentRegistrationPage.checkResults("Student Name", "Kseniia Romanovskaya")
-                .checkResults("Gender", "Female")
-                .checkResults("Mobile", "1234567890");
+                .checkModalIsVisible();
+        studentRegistrationPage.checkResults("Student Name", firstName + " " + lastName)
+                .checkGender()
+                .checkResults("Mobile", phoneNumber);
     }
 
     @Test
