@@ -11,7 +11,8 @@ public class RandomUtils {
             lastName = faker.name().lastName(),
             userEmail = faker.internet().emailAddress(),
             streetAddress = faker.address().streetAddress(),
-            phoneNumber = faker.numerify("##########");
+            phoneNumber = faker.numerify("##########"),
+            invalidPhoneNumber = faker.numerify(new String(new char[faker.number().numberBetween(1, 15)]).replace("\0", "#"));
 
     public static String[] generateRandomDate() {
         Faker faker = new Faker(Locale.ENGLISH);

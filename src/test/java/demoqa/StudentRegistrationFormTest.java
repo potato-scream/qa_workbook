@@ -55,9 +55,10 @@ public class StudentRegistrationFormTest extends TestBase {
 
     @Test
     void invalidRequiredFieldsTest() {
+
         studentRegistrationPage.openPage()
                 .removeBanner()
-                .setPhoneNumber("")
+              //  .setPhoneNumber(emptyString)
                 .pressSubmit()
                 .checkFirstNameInputIsInvalid()
                 .checkLastNameInputIsInvalid()
@@ -68,7 +69,7 @@ public class StudentRegistrationFormTest extends TestBase {
     void registrationFormWithShortPhoneNumberTest() {
         studentRegistrationPage.openPage()
                 .removeBanner()
-                .setPhoneNumber("123")
+                .setPhoneNumber(invalidPhoneNumber)
                 .pressSubmit()
                 .checkUserNumberFieldIsInvalid();
     }
