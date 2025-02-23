@@ -19,7 +19,7 @@ public class CpPtTest {
         CpPtPage.openPage();
     }
 
-    @Tag("WEB")
+    @Tag("ID 1")
     @DisplayName("Page heading should be correct when language changed")
     @EnumSource(Language.class)
     @ParameterizedTest
@@ -41,7 +41,7 @@ public class CpPtTest {
         );
     }
 
-    @Tag("WEB")
+    @Tag("ID 2")
     @DisplayName("Text in navigation menu buttons should be correct when language changed")
     @MethodSource
     @ParameterizedTest
