@@ -8,13 +8,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import pages.CpPtPage;
-
 import java.util.List;
 import java.util.stream.Stream;
-
-import static com.codeborne.selenide.CollectionCondition.texts;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$$;
 
 public class CpPtTest {
     CpPtPage CpPtPage = new CpPtPage();
