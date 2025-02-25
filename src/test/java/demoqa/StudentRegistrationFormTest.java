@@ -2,39 +2,41 @@ package demoqa;
 
 import org.junit.jupiter.api.Test;
 import pages.StudentRegistrationPage;
-import static utils.RandomUtils.*;
+import utils.RandomUtils;
+
 
 public class StudentRegistrationFormTest extends TestBase {
     StudentRegistrationPage studentRegistrationPage = new StudentRegistrationPage();
+    RandomUtils randomUtils = new RandomUtils();
 
     @Test
     void studentRegistrationFormTest() {
         studentRegistrationPage.openPage()
                 .removeBanner()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
+                .setFirstName(randomUtils.firstName)
+                .setLastName(randomUtils.lastName)
+                .setEmail(randomUtils.userEmail)
                 .setGender()
-                .setPhoneNumber(phoneNumber)
+                .setPhoneNumber(randomUtils.phoneNumber)
                 .setSubject()
                 .setDateOfBirth()
                 .setHobby()
                 .setPicture()
-                .setAddress(streetAddress)
+                .setAddress(randomUtils.streetAddress)
                 .setState()
                 .setCity()
                 .pressSubmit()
                 .checkModalIsVisible();
 
-        studentRegistrationPage.checkResults("Student Name", firstName + " " + lastName)
-                .checkResults("Student Email", userEmail)
+        studentRegistrationPage.checkResults("Student Name", randomUtils.firstName + " " + randomUtils.lastName)
+                .checkResults("Student Email", randomUtils.userEmail)
                 .checkGender()
-                .checkResults("Mobile", phoneNumber)
+                .checkResults("Mobile", randomUtils.phoneNumber)
                 .checkDateOfBirth()
                 .checkSubject()
                 .checkHobby()
                 .checkPicture()
-                .checkResults("Address", streetAddress)
+                .checkResults("Address", randomUtils.streetAddress)
                 .checkStateAndCity();
     }
 
@@ -42,15 +44,15 @@ public class StudentRegistrationFormTest extends TestBase {
     void registrationFormRequiredFieldsTest() {
         studentRegistrationPage.openPage()
                 .removeBanner()
-                .setFirstName(firstName)
-                .setLastName(lastName)
+                .setFirstName(randomUtils.firstName)
+                .setLastName(randomUtils.lastName)
                 .setGender()
-                .setPhoneNumber(phoneNumber)
+                .setPhoneNumber(randomUtils.phoneNumber)
                 .pressSubmit()
                 .checkModalIsVisible();
-        studentRegistrationPage.checkResults("Student Name", firstName + " " + lastName)
+        studentRegistrationPage.checkResults("Student Name", randomUtils.firstName + " " + randomUtils.lastName)
                 .checkGender()
-                .checkResults("Mobile", phoneNumber);
+                .checkResults("Mobile", randomUtils.phoneNumber);
     }
 
     @Test
@@ -58,7 +60,6 @@ public class StudentRegistrationFormTest extends TestBase {
 
         studentRegistrationPage.openPage()
                 .removeBanner()
-              //  .setPhoneNumber(emptyString)
                 .pressSubmit()
                 .checkFirstNameInputIsInvalid()
                 .checkLastNameInputIsInvalid()
@@ -69,7 +70,7 @@ public class StudentRegistrationFormTest extends TestBase {
     void registrationFormWithShortPhoneNumberTest() {
         studentRegistrationPage.openPage()
                 .removeBanner()
-                .setPhoneNumber(invalidPhoneNumber)
+                .setPhoneNumber(randomUtils.invalidPhoneNumber)
                 .pressSubmit()
                 .checkUserNumberFieldIsInvalid();
     }

@@ -1,12 +1,14 @@
 package pages.components;
 
+import utils.RandomUtils;
+
 import static com.codeborne.selenide.Selenide.$;
-import static utils.RandomUtils.generateRandomDate;
 
 public class CalendarComponent {
+        RandomUtils randomUtils = new RandomUtils();
         public static String fullDate;
 
-        public String[] dateComponents = generateRandomDate();
+        public String[] dateComponents = randomUtils.generateRandomDate();
         public void setRandomDate() {
                 String month = dateComponents[0];
                 String year = dateComponents[1];

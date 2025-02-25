@@ -14,9 +14,11 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static pages.components.CalendarComponent.fullDate;
-import static utils.RandomUtils.*;
+
 
 public class StudentRegistrationPage {
+
+    public RandomUtils randomUtils = new RandomUtils();
     public StudentRegistrationPage openPage() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
@@ -74,7 +76,7 @@ public class StudentRegistrationPage {
     public String selectedGender;
 
     public StudentRegistrationPage setGender() {
-        selectedGender = getRandomGender();
+        selectedGender = randomUtils.getRandomGender();
         genderWrapper.$(byText(selectedGender)).click();
 
         return this;
@@ -102,23 +104,23 @@ public class StudentRegistrationPage {
     public String selectedSubject;
 
     public StudentRegistrationPage setSubject() {
-        selectedSubject = getRandomSubject();
+        selectedSubject = randomUtils.getRandomSubject();
         subjectsInput.setValue(selectedSubject).pressEnter();
 
         return this;
     }
 
     public StudentRegistrationPage setHobby() {
-        selectedHobby = getRandomHobby();
+        selectedHobby = randomUtils.getRandomHobby();
         hobbiesWrapper.$(byText(selectedHobby)).click();
 
         return this;
     }
 
-    String selectedPicture = getRandomPicture();
+    String selectedPicture = randomUtils.getRandomPicture();
 
     public StudentRegistrationPage setPicture() {
-        selectedPicture = getRandomPicture();
+        selectedPicture = randomUtils.getRandomPicture();
         uploadPicture.uploadFromClasspath(selectedPicture);
 
         return this;
@@ -127,7 +129,7 @@ public class StudentRegistrationPage {
 
     public StudentRegistrationPage setState() {
         stateSelect.click();
-        selectedState = RandomUtils.getRandomState();
+        selectedState = randomUtils.getRandomState();
         stateWrapper.$(byText(selectedState)).click();
         return this;
     }
@@ -136,7 +138,7 @@ public class StudentRegistrationPage {
 
     public StudentRegistrationPage setCity() {
         citySelect.click();
-        selectedCity = RandomUtils.getRandomCity(selectedState);
+        selectedCity = randomUtils.getRandomCity(selectedState);
         cityWrapper.$(byText(selectedCity)).click();
         return this;
     }
@@ -191,13 +193,11 @@ public class StudentRegistrationPage {
         return this;
     }
 
-    private static final String modalSuccessTest = "Thanks for submitting the form";
-
-    public StudentRegistrationPage checkModalIsVisible() {
+    public void checkModalIsVisible() {
         $(modalDialog).should(appear);
+        String modalSuccessTest = "Thanks for submitting the form";
         $(modalTitle).shouldHave(text(modalSuccessTest));
 
-        return this;
     }
 
     public StudentRegistrationPage checkFieldIsInvalid(SelenideElement element) {
@@ -216,7 +216,7 @@ public class StudentRegistrationPage {
         return checkFieldIsInvalid(lastNameInput);
     }
 
-    public StudentRegistrationPage checkUserNumberFieldIsInvalid() {
-        return checkFieldIsInvalid(phoneNumberInput);
+    public void checkUserNumberFieldIsInvalid() {
+        checkFieldIsInvalid(phoneNumberInput);
     }
 }
