@@ -2,62 +2,64 @@ package demoqa;
 
 import org.junit.jupiter.api.Test;
 import pages.StudentRegistrationPage;
+import utils.RandomUtils;
 
 
 public class StudentRegistrationFormTest extends TestBase {
     StudentRegistrationPage studentRegistrationPage = new StudentRegistrationPage();
+    RandomUtils randomUtils = new RandomUtils();
 
     @Test
     void studentRegistrationFormTest() {
         studentRegistrationPage.openPage()
                 .removeBanner()
-                .setFirstName("Kseniia")
-                .setLastName("Romanovskaya")
-                .setEmail("potato@cat.com")
-                .setGender("Female")
-                .setPhoneNumber("1234567890")
-                .setSubject("Math")
-                .setDateOfBirth("30", "July", "2008")
-                .setHobbi("Sports")
-                .setPicture("img/1.png")
-                .setAddress("Some address 1")
-                .setState("NCR")
-                .setCity("Delhi")
+                .setFirstName(randomUtils.firstName)
+                .setLastName(randomUtils.lastName)
+                .setEmail(randomUtils.userEmail)
+                .setGender()
+                .setPhoneNumber(randomUtils.phoneNumber)
+                .setSubject()
+                .setDateOfBirth()
+                .setHobby()
+                .setPicture()
+                .setAddress(randomUtils.streetAddress)
+                .setState()
+                .setCity()
                 .pressSubmit()
-                .checkModalIsVisible(" Thanks for submitting the form");
+                .checkModalIsVisible();
 
-        studentRegistrationPage.checkResults("Student Name", "Kseniia Romanovskaya")
-                .checkResults("Student Email", "potato@cat.com")
-                .checkResults("Gender", "Female")
-                .checkResults("Mobile", "1234567890")
-                .checkResults("Date of Birth", "30 July,2008")
-                .checkResults("Subjects", "Maths")
-                .checkResults("Hobbies", "Sports")
-                .checkResults("Picture", "1.png")
-                .checkResults("Address", "Some address 1")
-                .checkResults("State and City", "NCR Delhi");
+        studentRegistrationPage.checkResults("Student Name", randomUtils.firstName + " " + randomUtils.lastName)
+                .checkResults("Student Email", randomUtils.userEmail)
+                .checkGender()
+                .checkResults("Mobile", randomUtils.phoneNumber)
+                .checkDateOfBirth()
+                .checkSubject()
+                .checkHobby()
+                .checkPicture()
+                .checkResults("Address", randomUtils.streetAddress)
+                .checkStateAndCity();
     }
 
     @Test
     void registrationFormRequiredFieldsTest() {
         studentRegistrationPage.openPage()
                 .removeBanner()
-                .setFirstName("Kseniia")
-                .setLastName("Romanovskaya")
-                .setGender("Female")
-                .setPhoneNumber("1234567890")
+                .setFirstName(randomUtils.firstName)
+                .setLastName(randomUtils.lastName)
+                .setGender()
+                .setPhoneNumber(randomUtils.phoneNumber)
                 .pressSubmit()
-                .checkModalIsVisible(" Thanks for submitting the form");
-        studentRegistrationPage.checkResults("Student Name", "Kseniia Romanovskaya")
-                .checkResults("Gender", "Female")
-                .checkResults("Mobile", "1234567890");
+                .checkModalIsVisible();
+        studentRegistrationPage.checkResults("Student Name", randomUtils.firstName + " " + randomUtils.lastName)
+                .checkGender()
+                .checkResults("Mobile", randomUtils.phoneNumber);
     }
 
     @Test
     void invalidRequiredFieldsTest() {
+
         studentRegistrationPage.openPage()
                 .removeBanner()
-                .setPhoneNumber("")
                 .pressSubmit()
                 .checkFirstNameInputIsInvalid()
                 .checkLastNameInputIsInvalid()
@@ -68,7 +70,7 @@ public class StudentRegistrationFormTest extends TestBase {
     void registrationFormWithShortPhoneNumberTest() {
         studentRegistrationPage.openPage()
                 .removeBanner()
-                .setPhoneNumber("123")
+                .setPhoneNumber(randomUtils.invalidPhoneNumber)
                 .pressSubmit()
                 .checkUserNumberFieldIsInvalid();
     }

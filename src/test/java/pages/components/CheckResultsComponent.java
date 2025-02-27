@@ -7,6 +7,5 @@ public class CheckResultsComponent {
 
     public void checkResults(String key, String value) {
         $(".table-responsive").$(byText(key)).parent().shouldHave(text(value));
-
     }
 }
