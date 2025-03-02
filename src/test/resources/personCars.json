@@ -1,0 +1,16 @@
+{
+  "name": "John",
+  "age": 30,
+  "cars": [
+    {
+      "brand": "Ford",
+      "model": "Mustang",
+      "year": 2015
+    },
+    {
+      "brand": "Audi",
+      "model": "Q5",
+      "year": 2018
+    }
+  ]
+}
