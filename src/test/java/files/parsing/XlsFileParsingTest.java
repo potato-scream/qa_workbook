@@ -1,4 +1,4 @@
-package filesParsing;
+package files.parsing;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
