@@ -1,5 +1,6 @@
 package demoqa;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.StudentRegistrationPage;
 import utils.RandomUtils;
@@ -8,7 +9,7 @@ import utils.RandomUtils;
 public class StudentRegistrationFormTest extends TestBase {
     StudentRegistrationPage studentRegistrationPage = new StudentRegistrationPage();
     RandomUtils randomUtils = new RandomUtils();
-
+    @Tag("demoqa")
     @Test
     void studentRegistrationFormTest() {
         studentRegistrationPage.openPage()
