@@ -5,22 +5,6 @@ import org.junit.jupiter.api.Test;
 import pages.StudentRegistrationPage;
 import utils.RandomUtils;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import helpers.Attach;
-import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.util.Map;
-
-import static com.codeborne.selenide.Condition.appear;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
 public class StudentRegistrationFormTest extends TestBase {

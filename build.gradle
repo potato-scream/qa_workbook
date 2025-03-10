@@ -19,8 +19,7 @@ repositories {
     mavenCentral()
 }
 
-def allureVersion = "2.19.0",
-    selenideVersion = "6.7.2"
+def allureVersion = "2.19.0";
 
 allure {
     report {
@@ -34,6 +33,7 @@ allure {
             }
         }
     }
+
 }
 
 compileTestJava {
@@ -60,6 +60,7 @@ test {
         systemProperty "env", "prod"
     }
     systemProperties(System.getProperties())
+    systemProperty "allure.results.directory", "${project.buildDir}/allure-results"
 }
 
 tasks.withType(Test).configureEach {
@@ -72,7 +73,6 @@ tasks.withType(Test).configureEach {
         }
     }
 }
-
 
 tasks.register('demoqa_test', Test) {
     useJUnitPlatform {
