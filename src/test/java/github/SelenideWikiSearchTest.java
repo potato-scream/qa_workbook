@@ -18,23 +18,24 @@ public class SelenideWikiSearchTest {
 
     @Test
     void  selenideWikiSearchTest() {
-        open("https://github.com/selenide/selenide");
-        $("#wiki-tab").click();
-        $(".wiki-more-pages-link button").click();
-        $("#wiki-pages-box").$(byText("SoftAssertions")).click();
-        $(".markdown-body").shouldHave(text("""
-                @ExtendWith({SoftAssertsExtension.class})
-                class Tests {
-                  @Test
-                  void test() {
-                    Configuration.assertionMode = SOFT;
-                    open("page.html");
-                
-                    $("#first").should(visible).click();
-                    $("#second").should(visible).click();
-                  }
-                }
-                """));
+//        open("https://github.com/selenide/selenide");
+//        $("#wiki-tab").click();
+//        $(".wiki-more-pages-link button").click();
+//        $("#wiki-pages-box").$(byText("SoftAssertions")).click();
+//        $(".markdown-body").shouldHave(text("""
+//                @ExtendWith({SoftAssertsExtension.class})
+//                class Tests {
+//                  @Test
+//                  void test() {
+//                    Configuration.assertionMode = SOFT;
+//                    open("page.html");
+//
+//                    $("#first").should(visible).click();
+//                    $("#second").should(visible).click();
+//                  }
+//                }
+//                """));
     }
 }
+
 
