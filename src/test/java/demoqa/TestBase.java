@@ -15,13 +15,13 @@ public class TestBase {
     static void beforeAll() {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+ //       Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         Configuration.browser = System.getProperty("browser", "chrome");
 
-//            String selenoidUrl = System.getProperty("SELENOID_URL");
-//            if (selenoidUrl != null && !selenoidUrl.isEmpty()) {
-//                Configuration.remote = selenoidUrl;
-//            }
+            String selenoidUrl = System.getProperty("SELENOID_URL");
+            if (selenoidUrl != null && !selenoidUrl.isEmpty()) {
+                Configuration.remote = selenoidUrl;
+            }
 
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
