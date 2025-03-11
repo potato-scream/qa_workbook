@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import helpers.Attach;
+
 import java.util.Map;
 
 public class TestBase {
@@ -15,14 +16,16 @@ public class TestBase {
     static void beforeAll() {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
- //       Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        //       Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         Configuration.browser = System.getProperty("browser", "chrome");
-
-            String selenoidUrl = System.getProperty("SELENOID_URL");
-            System.out.println(selenoidUrl);
-            if (selenoidUrl != null && !selenoidUrl.isEmpty()) {
-                Configuration.remote = selenoidUrl;
-            }
+        String user = System.getProperty("user");
+        String password = System.getProperty("password");
+        String selenoidUrl = System.getProperty("SELENOID_URL");
+        String fullUrl = "https://" + user + ":" + password + "@" + selenoidUrl;
+        System.out.println(fullUrl);
+        if (selenoidUrl != null && !selenoidUrl.isEmpty()) {
+            Configuration.remote = fullUrl;
+        }
 
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
