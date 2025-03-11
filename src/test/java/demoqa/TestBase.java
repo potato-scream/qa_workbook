@@ -19,6 +19,7 @@ public class TestBase {
         Configuration.browser = System.getProperty("browser", "chrome");
 
             String selenoidUrl = System.getProperty("SELENOID_URL");
+            System.out.println(selenoidUrl);
             if (selenoidUrl != null && !selenoidUrl.isEmpty()) {
                 Configuration.remote = selenoidUrl;
             }
