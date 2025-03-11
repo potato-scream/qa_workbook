@@ -42,8 +42,12 @@ dependencies {
             "com.codeborne:selenide:6.19.1",
             "org.junit.jupiter:junit-jupiter:5.10.0",
             'com.github.javafaker:javafaker:1.0.2',
+            'commons-io:commons-io:2.15.0',
+            'com.codeborne:pdf-test:1.5.0',
+            'com.codeborne:xls-test:1.4.3',
+            'com.opencsv:opencsv:5.9',
+            'com.fasterxml.jackson.core:jackson-databind:2.18.2',
             'org.slf4j:slf4j-simple:2.0.7',
-            'com.codeborne:selenide:6.7.2',
             'io.qameta.allure:allure-selenide:2.19.0',
             'io.qameta.allure:allure-junit5:2.19.0'
 
@@ -52,9 +56,10 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform{
+    useJUnitPlatform {
 
         systemProperty "env", "prod"
+
     }
     systemProperties(System.getProperties())
 }
