@@ -20,7 +20,7 @@ public class TestBase {
         Configuration.browser = System.getProperty("browser", "chrome");
         String user = System.getProperty("user");
         String password = System.getProperty("password");
-        String selenoidUrl = System.getProperty("SELENOID_URL");
+        String selenoidUrl = System.getProperty("selenoidUrl");
         String fullUrl = "https://" + user + ":" + password + "@" + selenoidUrl;
         System.out.println(user);
         System.out.println(password);
