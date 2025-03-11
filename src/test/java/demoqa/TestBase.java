@@ -22,6 +22,8 @@ public class TestBase {
         String password = System.getProperty("password");
         String selenoidUrl = System.getProperty("SELENOID_URL");
         String fullUrl = "https://" + user + ":" + password + "@" + selenoidUrl;
+        System.out.println(user);
+        System.out.println(password);
         System.out.println(fullUrl);
         if (selenoidUrl != null && !selenoidUrl.isEmpty()) {
             Configuration.remote = fullUrl;
