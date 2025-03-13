@@ -19,18 +19,21 @@ repositories {
     mavenCentral()
 }
 
+def allureVersion = "2.19.0";
+
 allure {
     report {
-        version.set("2.19.0")
+        version.set(allureVersion)
     }
     adapter {
         aspectjWeaver.set(true)
         frameworks {
             junit5 {
-                adapterVersion.set("2.19.0")
+                adapterVersion.set(allureVersion)
             }
         }
     }
+
 }
 
 compileTestJava {
@@ -62,4 +65,23 @@ test {
 
     }
     systemProperties(System.getProperties())
+    systemProperty "allure.results.directory", "${project.buildDir}/allure-results"
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
+tasks.register('demoqa_test', Test) {
+    useJUnitPlatform {
+        includeTags("demoqa")
+    }
 }
