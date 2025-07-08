@@ -11,6 +11,8 @@ import pages.CpPtPage;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static io.qameta.allure.Allure.step;
+
 public class CpPtTest {
     CpPtPage cpPtPage = new CpPtPage();
 
@@ -20,15 +22,20 @@ public class CpPtTest {
     }
 
     @Tag("ID 1")
-    @DisplayName("Page heading should be correct when language changed")
+    @DisplayName("Page heading should be correct when language is changed")
     @EnumSource(Language.class)
-    @ParameterizedTest
-    void cpPtshouldHaveCorrectDescriptionTest(Language language) {
-        cpPtPage.changeLanguage(language.name());
-        cpPtPage.checkDescription(language.description);
+    @ParameterizedTest(name = "For language {0}, the description should be correct")
+    void cpPtShouldHaveCorrectDescriptionTest(Language language) {
+        step("Change language to: " + language.name(), () -> {
+            cpPtPage.changeLanguage(language.name());
+        });
+
+        step("Verify page description is: \"" + language.description + "\"", () -> {
+            cpPtPage.checkDescription(language.description);
+        });
     }
 
-    static Stream<Arguments> cpPtshouldHaveCorrectButtonsTest() {
+    static Stream<Arguments> cpPtShouldHaveCorrectButtonsTest() {
         return Stream.of(
                 Arguments.of(
                         Language.EN,
@@ -42,11 +49,16 @@ public class CpPtTest {
     }
 
     @Tag("ID 2")
-    @DisplayName("Text in navigation menu buttons should be correct when language changed")
+    @DisplayName("Text in navigation menu buttons should be correct when language is changed")
     @MethodSource
-    @ParameterizedTest
-    void cpPtshouldHaveCorrectButtonsTest(Language language, List<String> expectedButtonText) {
-        cpPtPage.changeLanguage(language.name());
-        cpPtPage.checkButtonsText(expectedButtonText);
+    @ParameterizedTest(name = "For language {0}, navigation buttons should be correct")
+    void cpPtShouldHaveCorrectButtonsTest(Language language, List<String> expectedButtonText) {
+        step("Change language to: " + language.name(), () -> {
+            cpPtPage.changeLanguage(language.name());
+        });
+
+        step("Verify navigation buttons text", () -> {
+            cpPtPage.checkButtonsText(expectedButtonText);
+        });
     }
 }

@@ -1,9 +1,12 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import pages.CfiercePage;
+
+import static io.qameta.allure.Allure.step;
 
 public class CfierceTest {
     CfiercePage cfiercePage = new CfiercePage();
@@ -14,19 +17,30 @@ public class CfierceTest {
     }
 
     @ValueSource(strings = {"TOPS", "Bottoms", "Dress"})
-
     @Tag("ID 3")
-    @ParameterizedTest(name = "Для поиска по типу товара {0} в меню All нужно получить список карточек")
+    @DisplayName("Search results should not be empty for product type")
+    @ParameterizedTest(name = "For product type \"{0}\", search results should be displayed")
     void searchResultsShouldNotBeEmptyTest(String navItem) {
-        cfiercePage.searchByProductType(navItem);
-        cfiercePage.searchResultsShouldNotBeEmpty();
+        step("Search by product type: " + navItem, () -> {
+            cfiercePage.searchByProductType(navItem);
+        });
+
+        step("Verify that search results are not empty", () -> {
+            cfiercePage.searchResultsShouldNotBeEmpty();
+        });
     }
 
-    @CsvSource(value = {"CONTACT, Contact us", "BLOG, News"})
-
+    @CsvSource(value = {
+            "CONTACT, Contact us",
+            "BLOG, News"
+    })
     @Tag("ID 4")
-    @ParameterizedTest(name = "При клику по элементу навигации {0} переходим на страницу с заголовком {1}")
+    @DisplayName("Navigation items should lead to correct pages")
+    @ParameterizedTest(name = "Clicking on \"{0}\" should lead to a page with heading \"{1}\"")
     void navigationShouldLeadToTheCorrectPageTest(String navItem, String pageHeading) {
-        cfiercePage.checkHeadingText(navItem, pageHeading);
+        step("Navigate to " + navItem + " and verify page heading", () -> {
+            cfiercePage.checkNavigationAndHeading(navItem, pageHeading);
+        });
     }
 }
+
